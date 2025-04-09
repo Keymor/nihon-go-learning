@@ -3,6 +3,7 @@ import dotenv from 'dotenv'
 import mongoose from 'mongoose'
 import cors from 'cors'
 import Lessons from './lesson.js'
+import UserData from './user.js'
 const PORT = 3560
 
 dotenv.config()
@@ -16,18 +17,29 @@ mongoose.connect(process.env.MONGODB_URI)
     .then(() => console.log('Connected to MongoDB'))
     .catch((err) => console.log('NO CONNECTION TO MANGODB', err))
 
-app.get('/cards/words', async (req, res) => {
-    const firstLesson = await Lessons.find({ lesson: 1 })
-    res.json(firstLesson)
+app.post('/user/data', async (req, res) => {
+    const user = await UserData.findById(req.body.id)
+    res.json(user)
 })
 
-app.get('/', (req, res) => {
-    res.send('works')
+app.post('/user/data/updatewords', async (req, res) => {
+    await UserData.updateOne(
+        { _id: '67f6133b390fe7af1b547c45' },
+        {
+            $set: { words: req.body.words },
+            $push: { completLessonsWords: req.body.completLessonsWords }
+        }
+    )
 })
 
 app.post('/cards/lesson', async (req, res) => {
     const lesson = await Lessons.find(req.body)
     res.json(lesson)
+})
+
+app.get('/cards/lesson', async (req, res) => {
+    const list = await Lessons.find()
+    res.json(list)
 })
 
 app.listen(PORT, () => {

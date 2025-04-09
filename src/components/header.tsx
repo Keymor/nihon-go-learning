@@ -2,7 +2,7 @@ import PlayButton from "./playButton"
 
 export default function Header() {
     return (
-        <div className='w-full mx-auto h-30 flex flex-row'>
+        <div className='w-full mx-auto min-h-28 flex flex-row'>
             <div className='m-10 my-auto flex sm:hidden'>
                 <button className='border-1 border-black rounded-3xl p-3'>Side</button>
             </div>

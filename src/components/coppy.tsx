@@ -12,10 +12,9 @@ interface Word {
 
 interface CardsFunctionProps {
     wordsArray: Word[];
-    lessonUpdate: () => void
 }
 
-const CardsFunction: React.FC<CardsFunctionProps> = ({ wordsArray, lessonUpdate }) => {
+const CardsFunction: React.FC<CardsFunctionProps> = ({ wordsArray }) => {
     const [clickButton, setClickButton] = useState(false)
     const [workArray, setWorkArray] = useState<Word[]>([{
         id: 0,
@@ -27,16 +26,38 @@ const CardsFunction: React.FC<CardsFunctionProps> = ({ wordsArray, lessonUpdate 
         lesson: 0
     }])
     const [repeatArray, setRepeateArray] = useState<Word[]>([])
+    const [display, setDisplay] = useState({
+        japanese: '',
+        english: '',
+        ukrainian: ''
+    })
     const [finish, setFinish] = useState(false)
 
+    const arrayUpdate = (newArray: Word[]) => {
+        setDisplay((d) => ({
+            ...d,
+            japanese: newArray[0].japaneseWord,
+            english: newArray[0].englishMeaning,
+            ukrainian: newArray[0].ukrainian
+        }))
+    }
+
     const cardsNext = () => {
-        if (workArray.length === 0 && repeatArray.length > 0 && clickButton) {
+        if (
+            workArray.length === 1 && repeatArray.length === 0 ||
+            workArray.length === 0 && repeatArray.length === 1
+        ) {
+            setFinish(true)
+            setDisplay((d) => ({ ...d, japanese: 'DONE!', english: '', ukrainian: '' }))
+        } else if (workArray.length === 0 && repeatArray.length > 0 && clickButton) {
             let newArray = repeatArray.slice(1)
+            arrayUpdate(newArray)
             setRepeateArray(newArray)
             setClickButton(!clickButton)
         } else if (clickButton) {
             let newArray = workArray.slice(1)
             setWorkArray(newArray)
+            arrayUpdate(newArray)
 
             setClickButton(!clickButton)
         } else {
@@ -49,71 +70,25 @@ const CardsFunction: React.FC<CardsFunctionProps> = ({ wordsArray, lessonUpdate 
             let newArray = repeatArray
             let firstElement = newArray.shift()
             let finalArray = [...newArray, firstElement!]
+
+            arrayUpdate(finalArray)
             setRepeateArray(finalArray)
-            setClickButton(false)
         } else if (workArray.length != 0) {
             let newArray = workArray.slice(1)
             setRepeateArray((r) => ([...r, workArray[0]]))
+            arrayUpdate(newArray)
             setWorkArray(newArray)
-            setClickButton(false)
         } else {
             let newArray = repeatArray.slice(1)
+            arrayUpdate(newArray)
             setRepeateArray(newArray)
-            setClickButton(false)
         }
-    }
-
-    const displayWords = () => {
-        return (
-            <div className="m-auto flex flex-col">
-                <p className="mx-auto text-3xl font-bold text-gray-700">
-                    {workArray.length === 0 ? '' : workArray[0].japaneseWord}
-                    {repeatArray.length > 0 && workArray.length === 0 ? repeatArray[0].japaneseWord : ''}
-                    {repeatArray.length === 0 && workArray.length === 0 ? 'Congratulations' : ''}
-                </p>
-                <p style={{ visibility: clickButton ? 'visible' : 'hidden' }} className="mx-auto mt-4 text-xl font-bold text-gray-600">
-                    {workArray.length === 0 ? '' : workArray[0].englishMeaning}
-                    {repeatArray.length > 0 && workArray.length === 0 ? repeatArray[0].englishMeaning : ''}
-                </p>
-                <p style={{ display: repeatArray.length === 0 && workArray.length === 0 ? '' : 'none'}} className="mx-auto mt-4 text-xl font-bold text-gray-600">
-                    You did it!
-                </p>
-            </div>
-        )
-    }
-
-    const reloadFun = () => {
-        const userUpdate = async () => {
-            const req = await fetch('http://localhost:3560/user/data', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ id: '67f6133b390fe7af1b547c45' })
-            })
-            const res = await req.json()
-
-            if (!res.completLessonsWords.includes(`lesson${wordsArray[0].lesson}`)) {
-                const lessonNumber = 'lesson' + wordsArray[0].lesson
-                await fetch('http://localhost:3560/user/data/updatewords', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ words: res.words + 10, completLessonsWords: lessonNumber })
-                })
-            }
-        }
-        userUpdate()
-        lessonUpdate()
-        setFinish(false)
     }
 
     useEffect(() => {
         setWorkArray(wordsArray)
+        arrayUpdate(wordsArray)
     }, [wordsArray])
-
-    useEffect(() => {
-        if (repeatArray.length === 0 && workArray.length === 0) {
-            setFinish(true)
-        }
-    }, [workArray, repeatArray])
 
     return (
         <div className="w-150 h-100 shadow-lg rounded-4xl gap-5 flex flex-col justify-between px-10 py-15 relative">
@@ -123,15 +98,14 @@ const CardsFunction: React.FC<CardsFunctionProps> = ({ wordsArray, lessonUpdate 
                     <p className="flex">Repeat {repeatArray.length}</p>
                     <p className="flex ml-auto">New words {workArray.length}</p>
                 </div>
-                <div className=" relative flex mt-5 w-full h-5 rounded-4xl inset-shadow-[0_4px_10px_rgb(0,0,0,0.2)] animate-[homeCards_1s_forwards]">
-                    <div style={{
-                        width: `${(10 - (workArray.length + repeatArray.length)) * 10}%`
-                    }}
-                        className=" bg-[rgb(231,92,92,1)] inset-0 absolute h-5 rounded-4xl z-1 duration-200"></div>
-                </div>
+                <div className="flex mt-5 w-full h-5 rounded-4xl inset-shadow-[0_4px_10px_rgb(0,0,0,0.2)]"></div>
             </div>
             <div className="flex my-auto">
-                {displayWords()}
+                <p className="m-auto text-2xl font-bold">
+                    {display.japanese}
+                    {display.english}
+                    {display.ukrainian}
+                </p>
             </div>
             <div style={{ display: finish ? 'none' : '' }} className="flex flex-row">
                 <button className="hover:bg-gray-700 hover:text-[rgb(231,92,92,1)] cursor-pointer w-50 shadow-md p-4 rounded-4xl font-bold text-gray-700 relative"
@@ -143,11 +117,6 @@ const CardsFunction: React.FC<CardsFunctionProps> = ({ wordsArray, lessonUpdate 
                     {clickButton ? 'NEXT' : 'CHECK'}
                 </button>
             </div>
-            <button style={{ display: finish ? '' : "none" }}
-                className="hover:bg-[rgb(231,92,92,1)] cursor-pointer w-50 m-auto shadow-md p-4 rounded-4xl font-bold text-gray-700 relative z-2"
-                onClick={reloadFun}>
-                <div className="absolute size-full -translate-x-4 -translate-y-4 rounded-4xl shadow-[-8px_-8px_8px_rgba(255,255,255,1)]"></div>
-                Go back</button>
         </div>
     )
 }
