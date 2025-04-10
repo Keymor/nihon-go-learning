@@ -47,7 +47,7 @@ export default function Cards() {
     const hendleLessonNum = (lesson: string) => {
         const lastChar = lesson.charAt(lesson.length - 1)
         const lessonNumber = parseInt(lastChar)
-        setLessonNum((l) => l = lessonNumber)
+        setLessonNum((lesson) => lesson = lessonNumber)
     }
 
     const finishLessonFun = () => {
