@@ -7,7 +7,6 @@ import UserData from './user.js'
 const PORT = 3560
 
 dotenv.config()
-const uri = process.env.MONGODB_URI
 const app = express()
 
 app.use(cors())
