@@ -84,7 +84,7 @@ const CardsFunction: React.FC<CardsFunctionProps> = ({ wordsArray, lessonUpdate 
 
     const reloadFun = () => {
         const userUpdate = async () => {
-            const req = await fetch('http://localhost:3560/user/data', {
+            const req = await fetch('http://192.168.1.38:3560/user/data', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ id: '67f6133b390fe7af1b547c45' })
@@ -93,7 +93,7 @@ const CardsFunction: React.FC<CardsFunctionProps> = ({ wordsArray, lessonUpdate 
 
             if (!res.completLessonsWords.includes(`lesson${wordsArray[0].lesson}`)) {
                 const lessonNumber = 'lesson' + wordsArray[0].lesson
-                await fetch('http://localhost:3560/user/data/updatewords', {
+                await fetch('http://192.168.1.38:3560/user/data/updatewords', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ words: res.words + 10, completLessonsWords: lessonNumber })
