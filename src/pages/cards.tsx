@@ -31,7 +31,7 @@ export default function Cards() {
 
     const cardsStars = async (lessonNum: number) => {
         try {
-            const res = await fetch('http://localhost:3560/cards/lesson', {
+            const res = await fetch('http://192.168.1.38:3560/cards/lesson', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ lesson: lessonNum })
@@ -59,7 +59,7 @@ export default function Cards() {
     useEffect(() => {
         const updatelesNum = async () => {
             try {
-                const res = await fetch('http://localhost:3560/cards/lesson', {
+                const res = await fetch('http://192.168.1.38:3560/cards/lesson', {
                     method: 'GET'
                 })
                 const responde = await res.json()
