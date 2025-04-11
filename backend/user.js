@@ -6,7 +6,9 @@ const userSchema = new mongoose.Schema({
     kanji: Number,
     completLessonsWords: [String],
     completLessons: [String],
-    completLessonsKanji: [String]
+    completLessonsKanji: [String],
+    name: String,
+    password: String
 })
 
 const UserData = mongoose.model('UserData', userSchema, 'users-list')
