@@ -2,7 +2,7 @@ import PlayButton from "./playButton"
 
 export default function Header() {
     return (
-        <div className='w-full mx-auto min-h-28 flex flex-row'>
+        <div className='w-full mx-auto h-20 sm:min-h-28 flex flex-row'>
             <div className='m-10 my-auto flex sm:hidden'>
                 <button className='border-1 border-black rounded-3xl p-3'>Side</button>
             </div>
@@ -12,7 +12,7 @@ export default function Header() {
                 <PlayButton link='/cards' text='Cards' />
                 <PlayButton link='/vocabulary' text='Vocabulary' />
             </div>
-            <div className='ml-auto my-auto mr-20'>
+            <div className='ml-auto my-auto mr-10 sm:mr-20'>
                 <PlayButton link='/user' text='User name' />
             </div>
         </div>
