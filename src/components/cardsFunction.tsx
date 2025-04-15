@@ -75,7 +75,7 @@ const CardsFunction: React.FC<CardsFunctionProps> = ({ wordsArray, lessonUpdate 
                     {workArray.length === 0 ? '' : workArray[0].englishMeaning}
                     {repeatArray.length > 0 && workArray.length === 0 ? repeatArray[0].englishMeaning : ''}
                 </p>
-                <p style={{ display: repeatArray.length === 0 && workArray.length === 0 ? '' : 'none'}} className="mx-auto mt-4 text-xl font-bold text-gray-600">
+                <p style={{ display: repeatArray.length === 0 && workArray.length === 0 ? '' : 'none' }} className="mx-auto mt-4 text-xl font-bold text-gray-600">
                     You did it!
                 </p>
             </div>
@@ -84,18 +84,25 @@ const CardsFunction: React.FC<CardsFunctionProps> = ({ wordsArray, lessonUpdate 
 
     const reloadFun = () => {
         const userUpdate = async () => {
-            const req = await fetch('http://192.168.1.38:3560/user/data', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ id: '67f6133b390fe7af1b547c45' })
+            const token = localStorage.getItem('token')
+            const req = await fetch('http://localhost:3560/userdata', {
+                method: 'GET',
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json'
+                }
             })
+
             const res = await req.json()
 
             if (!res.completLessonsWords.includes(`lesson${wordsArray[0].lesson}`)) {
                 const lessonNumber = 'lesson' + wordsArray[0].lesson
-                await fetch('http://192.168.1.38:3560/user/data/updatewords', {
+                await fetch('http://localhost:3560/user/data/updatewords', {
                     method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'application/json'
+                    },
                     body: JSON.stringify({ words: res.words + 10, completLessonsWords: lessonNumber })
                 })
             }

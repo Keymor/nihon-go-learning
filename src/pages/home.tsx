@@ -3,27 +3,33 @@ import Logo from "../components/logo"
 import Login from "../components/login"
 import { useEffect, useState } from "react"
 
+//search button
+//registration process
+//register text a bit bottom
+//red text cards and ending
+
 
 interface UserParam {
     lessons: number,
     words: number,
-    kanji: number
+    kanji: number,
+    username: string
 }
 
 export default function Home() {
-    const [loginCheck, setLoginCheck] = useState(true)
-    const [userID, setUserID] = useState('')
+    const [loginCheck, setLoginCheck] = useState(false)
     const [userScore, setUserScore] = useState<UserParam>({
         lessons: 0,
         words: 0,
-        kanji: 0
+        kanji: 0,
+        username: ''
     })
     const [animation, setAnimation] = useState({ first: true, second: false })
 
     const logInFun = () => {
         if (loginCheck === false && animation.second === true) {
             return (
-                <div className=" animate-[homeCards_1s_forwards]">
+                <div className=" animate-[homeCards_1s_forwards] flex mt-[50%]">
                     <Login setLogin={hendleLogin} />
                 </div>
             )
@@ -31,32 +37,31 @@ export default function Home() {
     }
 
     const updateScore = async () => {
-        const req = await fetch('http://192.168.1.38:3560/user/data', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ id: userID })
+        const token = localStorage.getItem('token')
+        await fetch('http://localhost:3560/userdata', {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json'
+            }
         })
-        const res = await req.json()
-        setUserScore((u) => ({ ...u, lessons: res.lessons, words: res.words, kanji: res.kanji }))
+            .then(res => res.json())
+            .then(data => {
+                setLoginCheck(true)
+                setUserScore((u) => ({ ...u, lessons: data.lessons, words: data.words, kanji: data.kanji, username: data.name }))
+            })
     }
-
-    useEffect(() => {
-        updateScore()
-    }, [])
-    
-    useEffect(() => {
-        updateScore()
-    }, [userID])
 
     useEffect(() => {
         setTimeout(() => {
             setAnimation((a) => ({ ...a, first: false, second: true }))
         }, 1000)
+        updateScore()
     }, [])
 
-    const hendleLogin = (id: string) => {
-        setLoginCheck(true)
-        setUserID(id)
+    const hendleLogin = () => {
+        updateScore()
+        window.location.reload()
     }
 
     return (
@@ -64,10 +69,12 @@ export default function Home() {
             <div style={{ display: animation.second ? '' : 'none' }} className="animate-[homeCards_1s_forwards] hidden sm:block">
                 <Logo />
             </div>
-            <Header />
+            <div style={{ display: loginCheck && animation.second ? '' : 'none' }} className="animate-[logoUp_1s_forwards]">
+                <Header />
+            </div>
             <div className="h-full flex flex-col gap-10 sm:gap-20 sm:m-auto">
                 <div style={{ display: animation.second && loginCheck ? '' : 'none' }} className="flex flex-col mx-auto animate-[homeCards_2s_forwards]">
-                    <h1 className="flex mx-auto font-bold text-3xl sm:text-4xl text-gray-700">Welcome</h1>
+                    <h1 className="flex mx-auto font-bold text-3xl sm:text-4xl text-gray-700">Welcome, {userScore.username}</h1>
                     <p className="flex mx-auto text-md sm:text-xl text-gray-500">Continue your journey to mastering Japanese</p>
                 </div>
                 <div className="h-full w-full mx-auto flex flex-col">

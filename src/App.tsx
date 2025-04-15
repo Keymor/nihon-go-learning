@@ -1,9 +1,9 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Home from './pages/home'
-//import WordList from './pages/wordlist'
 import Lessons from './pages/lessons'
 import Vocabulary from './pages/vocabulary'
 import Cards from './pages/cards'
+import Logout from './pages/logout'
 import './App.css'
 
 function App() {
@@ -15,6 +15,7 @@ function App() {
         <Route path='/lessons' element={<Lessons />} />
         <Route path='/cards' element={<Cards />} />
         <Route path='/vocabulary' element={<Vocabulary />} />
+        <Route path='/logout' element={<Logout />} />
       </Routes>
     </BrowserRouter>
   )

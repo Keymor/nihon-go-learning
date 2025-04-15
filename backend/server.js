@@ -5,6 +5,7 @@ import cors from 'cors'
 import Lessons from './lesson.js'
 import UserData from './user.js'
 import bcrypt from 'bcrypt'
+import jwt from 'jsonwebtoken'
 const PORT = 3560
 
 dotenv.config()
@@ -23,8 +24,14 @@ app.post('/user/data', async (req, res) => {
 })
 
 app.post('/user/data/updatewords', async (req, res) => {
+    const authHeader = req.headers['authorization']
+    const token = authHeader?.split(' ')[1]
+
+    if (!token) res.sendStatus(401);
+
+    const user = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET)
     await UserData.updateOne(
-        { _id: '67f6133b390fe7af1b547c45' },
+        { _id: user.iD },
         {
             $set: { words: req.body.words },
             $push: { completLessonsWords: req.body.completLessonsWords }
@@ -48,7 +55,7 @@ app.post('/register', async (req, res) => {
             res.status(500).send()
         }
     } else {
-        res.json({ succes: false })   
+        res.json({ succes: false })
     }
 })
 
@@ -60,7 +67,9 @@ app.post('/login', async (req, res) => {
         const userPassword = userData[0].password
         const result = await bcrypt.compare(req.body.password, userPassword)
         if (result) {
-            res.json({ succes: true, userID: userData[0]._id })
+            const user = { iD: userData[0]._id }
+            const accessToken = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '1h' })
+            res.json({ succes: true, userID: userData[0]._id, userName: userData.name, token: accessToken })
         } else {
             res.json({ succes: false })
         }
@@ -70,6 +79,37 @@ app.post('/login', async (req, res) => {
 app.get('/cards/lesson', async (req, res) => {
     const list = await Lessons.find()
     res.json(list)
+})
+
+app.get('/userdata', async (req, res) => {
+    const authHeader = req.headers['authorization']
+    const token = authHeader?.split(' ')[1]
+
+    if (!token) res.sendStatus(401);
+
+    try {
+        const user = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET)
+        const userData = await UserData.findById(user.iD)
+        res.json(userData)
+    } catch {
+
+    }
+})
+
+app.get('/vocabulary', async (req, res) => {
+    const authHeader = req.headers['authorization']
+    const token = authHeader?.split(' ')[1]
+
+    if (!token) res.sendStatus(401);
+
+    try {
+        jwt.verify(token, process.env.ACCESS_TOKEN_SECRET)
+        const vocab = await Lessons.find();
+        res.json(vocab)
+    } catch (error) {
+        console.error('JWT Verification Error:', error)
+        return res.status(401).json({ message: 'Unauthorized' })
+    }
 })
 
 app.listen(PORT, () => {
