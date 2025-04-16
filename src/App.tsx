@@ -4,6 +4,7 @@ import Lessons from './pages/lessons'
 import Vocabulary from './pages/vocabulary'
 import Cards from './pages/cards'
 import Logout from './pages/logout'
+import Kanji from './pages/kanji'
 import './App.css'
 
 function App() {
@@ -15,6 +16,7 @@ function App() {
         <Route path='/lessons' element={<Lessons />} />
         <Route path='/cards' element={<Cards />} />
         <Route path='/vocabulary' element={<Vocabulary />} />
+        <Route path='/kanji' element={<Kanji />} />
         <Route path='/logout' element={<Logout />} />
       </Routes>
     </BrowserRouter>

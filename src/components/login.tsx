@@ -22,7 +22,9 @@ const Login: React.FC<componentFun> = ({ setLogin }) => {
             })
             const respond = await request.json()
             if (respond.succes) {
-                window.alert('Secces!')
+                localStorage.setItem('token', respond.token)
+                setLogin()
+                console.log(respond)
             } else {
                 window.alert('This name is already exist')
             }
@@ -102,8 +104,8 @@ const Login: React.FC<componentFun> = ({ setLogin }) => {
                         logIn
                     </button>
                 }
-                <p style={{ display: registration ? 'none' : '' }} className="flex m-auto z-1">Still don't have an accaunt? <a onClick={() => setFade(true)} className="z-1 underline cursor-pointer"> Register</a></p>
-                <p style={{ display: registration ? '' : 'none' }} className="flex m-auto z-1">Already have an accaunt? <a onClick={() => setFade(true)} className="z-1 underline cursor-pointer"> logIn</a></p>
+                <p style={{ display: registration ? 'none' : '' }} className="flex mt-2 m-auto z-1">Still don't have an accaunt? <a onClick={() => setFade(true)} className="z-1 underline cursor-pointer"> Register</a></p>
+                <p style={{ display: registration ? '' : 'none' }} className="flex mt-2 m-auto z-1">Already have an accaunt? <a onClick={() => setFade(true)} className="z-1 underline cursor-pointer"> logIn</a></p>
             </div>
         </div>
     )

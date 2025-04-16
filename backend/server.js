@@ -6,6 +6,7 @@ import Lessons from './lesson.js'
 import UserData from './user.js'
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
+import ReadLessons from './readLessons.js'
 const PORT = 3560
 
 dotenv.config()
@@ -50,7 +51,11 @@ app.post('/register', async (req, res) => {
         try {
             const hashedPassword = await bcrypt.hash(req.body.password, 10)
             await UserData.create({ name: req.body.name, password: hashedPassword, lessons: 0, words: 0, kanji: 0 })
-            res.json({ succes: true })
+
+            const userId = await UserData.find({ name: req.body.name })
+            const user = { iD: userId[0]._id }
+            const accessToken = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '12h' })
+            res.json({ succes: true, userID: userId[0]._id, userName: userId[0].name, token: accessToken })
         } catch {
             res.status(500).send()
         }
@@ -68,7 +73,7 @@ app.post('/login', async (req, res) => {
         const result = await bcrypt.compare(req.body.password, userPassword)
         if (result) {
             const user = { iD: userData[0]._id }
-            const accessToken = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '1h' })
+            const accessToken = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '12h' })
             res.json({ succes: true, userID: userData[0]._id, userName: userData.name, token: accessToken })
         } else {
             res.json({ succes: false })
@@ -79,6 +84,47 @@ app.post('/login', async (req, res) => {
 app.get('/cards/lesson', async (req, res) => {
     const list = await Lessons.find()
     res.json(list)
+})
+
+app.get('/lessons', async (req, res) => {
+    const authHeader = req.headers['authorization']
+    const token = authHeader?.split(' ')[1]
+
+    if (!token) res.sendStatus(401);
+
+    try {
+        jwt.verify(token, process.env.ACCESS_TOKEN_SECRET)
+        const lessons = await ReadLessons.find()
+        res.json(lessons)
+    } catch {
+        console.error(err)
+    }
+})
+
+app.post('/lessons', async (req, res) => {
+    const authHeader = req.headers['authorization']
+    const token = authHeader?.split(' ')[1]
+
+    if (!token) res.sendStatus(401);
+
+    try {
+
+        const user = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET)
+        const userData = await UserData.findById(user.iD)
+
+        if (!userData.completLessons.includes(req.body.lessons)) {
+            const amountOfLessons = userData.lessons ? userData.lessons + 1 : 1
+            await UserData.updateOne(
+                { _id: user.iD },
+                {
+                    $push: { completLessons: req.body.lessons },
+                    $set: { lessons: amountOfLessons }
+                }
+            )
+        }
+    } catch {
+        console.error(err)
+    }
 })
 
 app.get('/userdata', async (req, res) => {
@@ -92,7 +138,7 @@ app.get('/userdata', async (req, res) => {
         const userData = await UserData.findById(user.iD)
         res.json(userData)
     } catch {
-
+        console.error(err)
     }
 })
 

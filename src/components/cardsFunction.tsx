@@ -71,7 +71,7 @@ const CardsFunction: React.FC<CardsFunctionProps> = ({ wordsArray, lessonUpdate 
                     {repeatArray.length > 0 && workArray.length === 0 ? repeatArray[0].japaneseWord : ''}
                     {repeatArray.length === 0 && workArray.length === 0 ? 'Congratulations' : ''}
                 </p>
-                <p style={{ visibility: clickButton ? 'visible' : 'hidden' }} className="mx-auto mt-4 text-xl font-bold text-gray-600">
+                <p style={{ visibility: clickButton ? 'visible' : 'hidden' }} className="mx-auto mt-4 text-xl font-bold text-[rgb(231,92,92,1)]">
                     {workArray.length === 0 ? '' : workArray[0].englishMeaning}
                     {repeatArray.length > 0 && workArray.length === 0 ? repeatArray[0].englishMeaning : ''}
                 </p>

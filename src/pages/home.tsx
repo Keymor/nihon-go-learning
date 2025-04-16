@@ -3,10 +3,7 @@ import Logo from "../components/logo"
 import Login from "../components/login"
 import { useEffect, useState } from "react"
 
-//search button
-//registration process
-//register text a bit bottom
-//red text cards and ending
+//loading animation
 
 
 interface UserParam {
@@ -84,11 +81,11 @@ export default function Home() {
                     {logInFun()}
                     <div style={{ display: loginCheck ? '' : 'none' }} className="w-full flex flex-col sm:flex-row mx-auto gap-3 sm:gap-30">
                         <div style={{ display: animation.second ? '' : 'none' }} className="relative animate-[homeCards_0.5s_forwards] bg-[url('/homeButton1.jpg')] bg-cover bg-no-repeat h-55 w-2/5 mx-auto lg:w-80 lg:h-115 rounded-4xl shadow-xl flex flex-col">
-                            <p className="m-auto font-bold text-4xl sm:text-6xl text-gray-700">{userScore.lessons}/100</p>
+                            <p className="m-auto font-bold text-4xl sm:text-6xl text-gray-700">{userScore.lessons}/10</p>
                             <p className="absolute bottom-10 left-1/2 -translate-x-1/2 text-md sm:text-2xl text-gray-700 whitespace-nowrap">Lessons complite</p>
                         </div>
                         <div style={{ display: animation.second ? '' : 'none' }} className="relative animate-[homeCards_1s_forwards] bg-[url('/homeButton2.jpg')] bg-cover bg-no-repeat h-55 w-2/5 mx-auto lg:w-80 lg:h-115 rounded-4xl flex flex-col shadow-xl">
-                            <p className="m-auto font-bold text-4xl sm:text-6xl text-gray-700">{userScore.words}/150</p>
+                            <p className="m-auto font-bold text-4xl sm:text-6xl text-gray-700">{userScore.words}/100</p>
                             <p className="absolute bottom-10 left-1/2 -translate-x-1/2 text-md sm:text-2xl text-gray-700 whitespace-nowrap">Mastered words</p>
                         </div>
                         <div style={{ display: animation.second ? '' : 'none' }} className="relative animate-[homeCards_1.5s_forwards] bg-[url('/homeButton3.jpg')] bg-cover bg-no-repeat h-55 w-2/5 mx-auto lg:w-80 lg:h-115 rounded-4xl flex flex-col shadow-xl">

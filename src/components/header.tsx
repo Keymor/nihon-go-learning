@@ -11,6 +11,7 @@ export default function Header() {
                 <PlayButton link='/lessons' text='Lessons' />
                 <PlayButton link='/cards' text='Cards' />
                 <PlayButton link='/vocabulary' text='Vocabulary' />
+                <PlayButton link='/kanji' text='Kanji' />
             </div>
             <div className='ml-auto my-auto mr-10 sm:mr-20'>
                 <PlayButton link='/logout' text='Log out' />
