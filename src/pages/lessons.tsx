@@ -22,8 +22,6 @@ interface Lessons {
     example: string
 }
 
-//add asddedede
-
 export default function Lessons() {
     const [lessons, setLessons] = useState<Lessons[]>()
     const [startLesson, setStartLesson] = useState(false)
