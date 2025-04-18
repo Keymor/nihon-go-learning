@@ -4,6 +4,7 @@ import mongoose from 'mongoose'
 import cors from 'cors'
 import Lessons from './lesson.js'
 import UserData from './user.js'
+import Kanji from './kanji.js'
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
 import ReadLessons from './readLessons.js'
@@ -152,6 +153,22 @@ app.get('/vocabulary', async (req, res) => {
         jwt.verify(token, process.env.ACCESS_TOKEN_SECRET)
         const vocab = await Lessons.find();
         res.json(vocab)
+    } catch (error) {
+        console.error('JWT Verification Error:', error)
+        return res.status(401).json({ message: 'Unauthorized' })
+    }
+})
+
+app.get('/kanji/list', async (req, res) => {
+    const authHeader = req.headers['authorization']
+    const token = authHeader?.split(' ')[1]
+
+    if (!token) res.sendStatus(401)
+
+    try {
+        jwt.verify(token, process.env.ACCESS_TOKEN_SECRET)
+        const kanji = await Kanji.find()
+        res.json(kanji)
     } catch (error) {
         console.error('JWT Verification Error:', error)
         return res.status(401).json({ message: 'Unauthorized' })

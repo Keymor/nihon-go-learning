@@ -24,8 +24,6 @@ export default function WordList() {
                 .then(data => setWords(data[0].words))
         } catch {
             (err: string) => console.log(err)
-        } finally {
-            console.log(words)
         }
     }
 
