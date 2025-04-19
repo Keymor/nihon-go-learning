@@ -65,6 +65,12 @@ export default function Cards() {
                 const responde = await res.json()
 
                 const newArray = responde.map((obj: wordsArray) => 'Lesson ' + obj.lesson)
+                newArray.sort((a: string, b: string) => {
+                    const aNumb = parseInt(a.substring(7));
+                    const bNumb = parseInt(b.substring(7));
+
+                    return aNumb - bNumb
+                })
                 setLessonsArray(newArray)
             } catch {
                 (err: string) => console.log(err)

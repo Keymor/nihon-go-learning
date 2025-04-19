@@ -3,13 +3,11 @@ import Logo from "../components/logo"
 import Login from "../components/login"
 import { useEffect, useState } from "react"
 
-//loading animation
 //end of cards logo
 //logo shift
 //footer
-//welcom screen
 //mobile UI
-
+//red cercle dissapear to quikly
 
 interface UserParam {
     lessons: number,
@@ -31,7 +29,7 @@ export default function Home() {
     const logInFun = () => {
         if (loginCheck === false && animation.second === true) {
             return (
-                <div className=" animate-[homeCards_1s_forwards] flex mt-[50%]">
+                <div className=" animate-[homeCards_1s_forwards] flex m-auto">
                     <Login setLogin={hendleLogin} />
                 </div>
             )
@@ -55,7 +53,9 @@ export default function Home() {
     }
 
     useEffect(() => {
+        console.log('START')
         setTimeout(() => {
+        console.log('END')
             setAnimation((a) => ({ ...a, first: false, second: true }))
         }, 1000)
         updateScore()
@@ -79,8 +79,8 @@ export default function Home() {
                     <h1 className="flex mx-auto font-bold text-3xl sm:text-4xl text-gray-700">Welcome, {userScore.username}</h1>
                     <p className="flex mx-auto text-md sm:text-xl text-gray-500">Continue your journey to mastering Japanese</p>
                 </div>
-                <div className="h-full w-full mx-auto flex flex-col">
-                    <div style={{ display: animation.first ? '' : 'none' }} className=" animate-[logo_1s_ease-in_forwards] m-auto sm:mt-20 flex bg-[url('/circle.png')] lg:w-[624px] lg:h-[660px] w-[250px] h-[310px] bg-cover bg-center">
+                <div className=" min-h-full min-w-full mx-auto flex flex-col">
+                    <div style={{ display: animation.first ? '' : 'none' }} className=" animate-[logo_1s_ease-in_forwards] m-auto translate-y-10 flex bg-[url('/circle.png')] lg:w-[624px] lg:h-[660px] w-[250px] h-[310px] bg-cover bg-center">
                         <p className=" flex mx-auto mt-[37%] text-xl lg:text-4xl font-bold text-white text-shadow-lg">日本語学習</p>
                     </div>
                     {logInFun()}

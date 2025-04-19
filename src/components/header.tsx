@@ -7,7 +7,7 @@ export default function Header() {
                 <button className='border-1 border-black rounded-3xl p-3'>Side</button>
             </div>
             <div className='my-auto sm:ml-20 gap-5 hidden sm:flex'>
-                <PlayButton link='/' text='Home' />
+                <PlayButton link='/home' text='Home' />
                 <PlayButton link='/lessons' text='Lessons' />
                 <PlayButton link='/cards' text='Cards' />
                 <PlayButton link='/vocabulary' text='Vocabulary' />

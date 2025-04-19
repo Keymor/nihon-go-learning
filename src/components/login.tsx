@@ -85,41 +85,42 @@ const Login: React.FC<componentFun> = ({ setLogin }) => {
 
     return (
         <div>
-            <div style={{ transition: '0.3s', opacity: fade ? '0%' : '100%' }} className=" opacity-0 w-full min-h-fit h-100 shadow-[8px_8px_8px_rgba(0,0,0,0.2)] rounded-4xl gap-5 flex flex-col justify-between px-10 py-15 relative">
+            <div style={{ transition: '0.3s', opacity: fade ? '0%' : '100%' }} className=" opacity-0 w-full min-h-fit h-100 shadow-[8px_8px_8px_rgba(0,0,0,0.2)] rounded-4xl flex flex-col justify-between px-10 py-8 relative">
+                <h1 className="font-bold mx-auto text-3xl text-gray-700">{registration ? 'Sign Up' : 'Log In'}</h1>
                 <div className="inset-0 absolute size-full rounded-4xl overflow-hidden">
                     {loading ? <Loading /> : null}
                 </div>
                 <div className=" absolute size-full inset-0 rounded-4xl shadow-[-8px_-8px_8px_rgba(255,255,255,1)]"></div>
                 <p style={{ display: incorrect ? '' : 'none' }} className="text-red-600 text-center">Wrong password or User Name</p>
-                <div className="bg-gray-100 mx-auto w-full min-h-fit h-15 rounded-3xl flex flex-col justify-between relative inset-shadow-[2px_2px_15px_rgb(0,0,0,0.2)]">
-                    <div className=" absolute w-full h-full inset-0 rounded-3xl inset-shadow-[-6px_-6px_10px_rgb(255,255,255,1)] z-0"></div>
-                    <input onChange={(e) => { setName(e.target.value) }} placeholder="Name" value={name} type="text" className="z-1 rounded-3xl p-2 text-center cursor-pointer flex mx-auto w-full h-full justify-center text-2xl font-medium text-gray-600" />
+                <div className="mx-auto w-full min-h-fit h-10 flex flex-col justify-between relative">
+                    <div className=" absolute w-[80%] h-[2px] inset-0 bg-gray-300 z-0 top-full mx-auto"></div>
+                    <input onChange={(e) => { setName(e.target.value) }} placeholder="Name" value={name} type="text" className="z-1 p-2 text-center cursor-pointer flex mx-auto w-full h-full justify-center text-2xl font-medium text-gray-700 outline-0" />
                 </div>
                 <p style={{ display: checkText && registration ? '' : 'none' }} className="text-red-600 text-center">Make sure your passwords match</p>
-                <div className="bg-gray-100 mx-auto w-full min-h-fit h-15 rounded-3xl flex flex-col justify-between relative inset-shadow-[2px_2px_15px_rgb(0,0,0,0.2)]">
-                    <div className=" absolute w-full h-full inset-0 rounded-3xl inset-shadow-[-6px_-6px_10px_rgb(255,255,255,1)] z-0"></div>
-                    <input onChange={(e) => { setPassword(e.target.value) }} placeholder="Password" value={password} type="password" className="z-1 rounded-3xl p-2 text-center cursor-pointer flex mx-auto w-full h-full justify-center text-2xl font-medium text-gray-600" />
+                <div className="mx-auto w-full min-h-fit h-10 flex flex-col justify-between relative">
+                    <div className=" absolute w-[80%] h-[2px] inset-0 bg-gray-300 z-0 top-full mx-auto"></div>
+                    <input onChange={(e) => { setPassword(e.target.value) }} placeholder="Password" value={password} type="password" className="z-1 rounded-3xl p-2 text-center cursor-pointer flex mx-auto w-full h-full justify-center text-2xl font-medium text-gray-600 outline-0" />
                 </div>
-                <div style={{ display: registration ? '' : 'none' }} className="bg-gray-100 mx-auto w-full min-h-fit h-15 rounded-3xl flex flex-col justify-between relative inset-shadow-[2px_2px_15px_rgb(0,0,0,0.2)]">
-                    <div className=" absolute w-full h-full inset-0 rounded-3xl inset-shadow-[-6px_-6px_10px_rgb(255,255,255,1)] z-0"></div>
-                    <input onChange={(e) => { setSeccondPass(e.target.value) }} placeholder="Password" value={secondPass} type="password" className="z-1 rounded-3xl p-2 text-center cursor-pointer flex mx-auto w-full h-full justify-center text-2xl font-medium text-gray-600" />
+                <div style={{ display: registration ? '' : 'none' }} className="mx-auto w-full min-h-fit h-10 flex flex-col justify-between relative">
+                    <div className=" absolute w-[80%] h-[2px] inset-0 bg-gray-300 z-0 top-full mx-auto"></div>
+                    <input onChange={(e) => { setSeccondPass(e.target.value) }} placeholder="Repeate password" value={secondPass} type="password" className="z-1 rounded-3xl p-2 text-center cursor-pointer flex mx-auto w-full h-full justify-center text-2xl font-medium text-gray-600 outline-0" />
                 </div>
                 <div className="flex flex-col">
                     {registration ?
                         <div className="flex flex-col">
-                            <button disabled={checkErr} onClick={registerFun} className=" disabled:bg-gray-400 w-50 bg-[rgb(231,92,92,1)] m-auto shadow-md text-2xl p-4 rounded-4xl font-bold text-gray-700 relative">
+                            <button disabled={checkErr} onClick={registerFun} className=" disabled:bg-gray-400 w-50 bg-[rgb(231,92,92,1)] mt-5 mx-auto shadow-md text-2xl p-4 rounded-4xl font-bold text-gray-700 relative">
                                 <div className=" cursor-pointer absolute size-full -translate-x-4 -translate-y-4 rounded-4xl shadow-[-8px_-8px_8px_rgba(255,255,255,1)] "></div>
-                                Registration
+                                Applay
                             </button>
                         </div>
                         :
-                        <button onClick={logInFun} className="w-50 bg-[rgb(231,92,92,1)] m-auto shadow-md text-2xl p-4 rounded-4xl font-bold text-gray-700 relative">
+                        <button onClick={logInFun} className="w-50 bg-[rgb(231,92,92,1)] mt-5 mx-auto shadow-md text-2xl p-4 rounded-4xl font-bold text-gray-700 relative">
                             <div className=" cursor-pointer absolute size-full -translate-x-4 -translate-y-4 rounded-4xl shadow-[-8px_-8px_8px_rgba(255,255,255,1)] "></div>
                             logIn
                         </button>
                     }
-                    <p style={{ display: registration ? 'none' : '' }} className="flex mt-2 m-auto z-1">Still don't have an accaunt? <a onClick={() => {setFade(true), setInccorect(false)}} className="z-1 underline cursor-pointer"> Register</a></p>
-                    <p style={{ display: registration ? '' : 'none' }} className="flex mt-2 m-auto z-1">Already have an accaunt? <a onClick={() => setFade(true)} className="z-1 underline cursor-pointer"> logIn</a></p>
+                    <p style={{ display: registration ? 'none' : '' }} className="flex mt-5 m-auto z-1">Still don't have an accaunt? <a onClick={() => { setFade(true), setInccorect(false) }} className="z-1 underline cursor-pointer"> Register</a></p>
+                    <p style={{ display: registration ? '' : 'none' }} className="flex mt-5 m-auto z-1">Already have an accaunt? <a onClick={() => setFade(true)} className="z-1 underline cursor-pointer"> logIn</a></p>
                 </div>
             </div>
         </div>
