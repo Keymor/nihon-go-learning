@@ -139,7 +139,7 @@ app.get('/userdata', async (req, res) => {
         const userData = await UserData.findById(user.iD)
         res.json(userData)
     } catch {
-        console.error(err)
+        console.log('Wrong token')
     }
 })
 

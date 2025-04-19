@@ -1,6 +1,7 @@
 import Logo from "../components/logo"
 import Header from "../components/header"
-import { use, useEffect, useState } from "react"
+import Loading from "../components/loading"
+import { useEffect, useState } from "react"
 
 interface Kanji {
     id: number,
@@ -29,6 +30,7 @@ export default function Kanji() {
 
     return (
         <div className="flex flex-col w-screen h-screen">
+            <Loading />
             <div >
                 <Logo />
             </div>
