@@ -30,7 +30,6 @@ export default function Kanji() {
 
     return (
         <div className="flex flex-col w-screen h-screen">
-            <Loading />
             <div >
                 <Logo />
             </div>
