@@ -19,7 +19,7 @@ export default function WordList() {
 
     const wordListGet = async () => {
         try {
-            await fetch('http://localhost:3560/cards/words')
+            await fetch(`${process.env.REACT_APP_PUBLIC_API_URL}/cards/words`)
                 .then(res => res.json())
                 .then(data => setWords(data[0].words))
         } catch {
@@ -37,7 +37,7 @@ export default function WordList() {
 
     const addWords = async (lessonNum: number) => {
         try {
-            const res = await fetch('http://localhost:3560/cards/lesson', {
+            const res = await fetch(`${process.env.REACT_APP_PUBLIC_API_URL}/cards/lesson`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ lesson: lessonNum })

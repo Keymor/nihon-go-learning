@@ -32,7 +32,7 @@ export default function Lessons() {
 
     const addVocab = async () => {
         const token = localStorage.getItem('token')
-        const req = await fetch('http://localhost:3560/lessons', {
+        const req = await fetch(`${process.env.REACT_APP_PUBLIC_API_URL}/userdata/lessons`, {
             method: 'GET',
             headers: {
                 'Authorization': `Bearer ${token}`,
@@ -101,7 +101,7 @@ export default function Lessons() {
         toggleLesson(0)
         
         const token = localStorage.getItem('token')
-        fetch ('http://localhost:3560/lessons', {
+        fetch (`${process.env.REACT_APP_PUBLIC_API_URL}/userdata/lessons`, {
             method: 'POST',
             headers: {
                 'Authorization': `Bearer ${token}`,

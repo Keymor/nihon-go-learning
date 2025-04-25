@@ -45,7 +45,7 @@ export default function Kanji() {
         setLoading(true)
         const token = localStorage.getItem('token')
         const getLessons = async () => {
-            const req = await fetch('http://localhost:3560/kanji/list', {
+            const req = await fetch(`${process.env.REACT_APP_PUBLIC_API_URL}/kanji/list`, {
                 method: 'GET',
                 headers: { 'Authorization': `Bearer ${token}` }
             }

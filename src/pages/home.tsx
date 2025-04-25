@@ -39,7 +39,7 @@ export default function Home() {
 
     const updateScore = async () => {
         const token = localStorage.getItem('token')
-        await fetch('http://nihon-go-learning-production.up.railway.app/userdata', {
+        await fetch(`${process.env.REACT_APP_PUBLIC_API_URL}/userdata`, {
             method: 'GET',
             headers: {
                 'Authorization': `Bearer ${token}`,
