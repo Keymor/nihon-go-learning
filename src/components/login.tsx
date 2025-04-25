@@ -19,7 +19,7 @@ const Login: React.FC<componentFun> = ({ setLogin }) => {
     const registerFun = async () => {
         try {
             setLoading(true)
-            const request = await fetch(`/register`, {
+            const request = await fetch(`${import.meta.env.VITE_API_URL}/register`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ name: name, password: password })
@@ -41,7 +41,7 @@ const Login: React.FC<componentFun> = ({ setLogin }) => {
     const logInFun = async () => {
         try {
             setLoading(true)
-            const request = await fetch(`/login`, {
+            const request = await fetch(`${import.meta.env.VITE_API_URL}/login`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ name: name, password: password })

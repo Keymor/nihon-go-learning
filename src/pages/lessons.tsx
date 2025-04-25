@@ -32,7 +32,7 @@ export default function Lessons() {
 
     const addVocab = async () => {
         const token = localStorage.getItem('token')
-        const req = await fetch(`/userdata/lessons`, {
+        const req = await fetch(`${import.meta.env.VITE_API_URL}/userdata/lessons`, {
             method: 'GET',
             headers: {
                 'Authorization': `Bearer ${token}`,
@@ -101,7 +101,7 @@ export default function Lessons() {
         toggleLesson(0)
         
         const token = localStorage.getItem('token')
-        fetch (`/userdata/lessons`, {
+        fetch (`${import.meta.env.VITE_API_URL}/userdata/lessons`, {
             method: 'POST',
             headers: {
                 'Authorization': `Bearer ${token}`,

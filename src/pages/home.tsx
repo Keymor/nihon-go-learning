@@ -39,7 +39,7 @@ export default function Home() {
 
     const updateScore = async () => {
         const token = localStorage.getItem('token')
-        await fetch(`/userdata`, {
+        await fetch(`${import.meta.env.VITE_API_URL}/userdata`, {
             method: 'GET',
             headers: {
                 'Authorization': `Bearer ${token}`,

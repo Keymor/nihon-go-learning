@@ -25,7 +25,7 @@ export default function Vocabulary() {
 
     const addVocab = async () => {
         const token = localStorage.getItem('token')
-        const req = await fetch(`/vocabulary`, {
+        const req = await fetch(`${import.meta.env.VITE_API_URL}/vocabulary`, {
             method: 'GET',
             headers: {
                 'Authorization': `Bearer ${token}`,

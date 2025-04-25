@@ -45,7 +45,7 @@ export default function Kanji() {
         setLoading(true)
         const token = localStorage.getItem('token')
         const getLessons = async () => {
-            const req = await fetch(`/kanji/list`, {
+            const req = await fetch(`${import.meta.env.VITE_API_URL}/kanji/list`, {
                 method: 'GET',
                 headers: { 'Authorization': `Bearer ${token}` }
             }
