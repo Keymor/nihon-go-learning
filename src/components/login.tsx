@@ -56,9 +56,8 @@ const Login: React.FC<componentFun> = ({ setLogin }) => {
                 setLoading(false)
                 setInccorect(true)
             }
-        } catch {
-            console.log(process.env.REACT_APP_PUBLIC_API_URL)
-            console.log('err from log in fun')
+        } catch (err) {
+            console.error(err)
         }
     }
 
