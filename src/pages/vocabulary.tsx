@@ -25,7 +25,7 @@ export default function Vocabulary() {
 
     const addVocab = async () => {
         const token = localStorage.getItem('token')
-        const req = await fetch(`${process.env.REACT_APP_PUBLIC_API_URL}/vocabulary`, {
+        const req = await fetch(`/vocabulary`, {
             method: 'GET',
             headers: {
                 'Authorization': `Bearer ${token}`,

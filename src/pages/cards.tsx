@@ -35,7 +35,7 @@ export default function Cards() {
     const cardsStars = async (lessonNum: number) => {
         setLoading(true)
         try {
-            const res = await fetch(`${process.env.REACT_APP_PUBLIC_API_URL}/cards/lesson`, {
+            const res = await fetch(`/cards/lesson`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ lesson: lessonNum })
@@ -64,7 +64,7 @@ export default function Cards() {
     useEffect(() => {
         const updatelesNum = async () => {
             try {
-                const res = await fetch(`${process.env.REACT_APP_PUBLIC_API_URL}/cards/lesson`, {
+                const res = await fetch(`/cards/lesson`, {
                     method: 'GET'
                 })
                 const responde = await res.json()

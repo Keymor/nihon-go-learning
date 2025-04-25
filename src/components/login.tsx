@@ -19,7 +19,7 @@ const Login: React.FC<componentFun> = ({ setLogin }) => {
     const registerFun = async () => {
         try {
             setLoading(true)
-            const request = await fetch(`${process.env.REACT_APP_PUBLIC_API_URL}/register`, {
+            const request = await fetch(`/register`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ name: name, password: password })
@@ -41,7 +41,7 @@ const Login: React.FC<componentFun> = ({ setLogin }) => {
     const logInFun = async () => {
         try {
             setLoading(true)
-            const request = await fetch(`${process.env.REACT_APP_PUBLIC_API_URL}/login`, {
+            const request = await fetch(`/login`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ name: name, password: password })
@@ -57,6 +57,7 @@ const Login: React.FC<componentFun> = ({ setLogin }) => {
                 setInccorect(true)
             }
         } catch {
+            console.log(process.env.REACT_APP_PUBLIC_API_URL)
             console.log('err from log in fun')
         }
     }

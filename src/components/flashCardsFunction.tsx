@@ -97,7 +97,7 @@ const FlashCardsFunction: React.FC<CardsFunctionProps> = ({ lessonArray, lessonU
 
         const userUpdate = async (lessonNum: number) => {
             const token = localStorage.getItem('token')
-            const req = await fetch(`${process.env.REACT_APP_PUBLIC_API_URL}/userdata`, {
+            const req = await fetch(`/userdata`, {
                 method: 'GET',
                 headers: {
                     'Authorization': `Bearer ${token}`,
@@ -112,7 +112,7 @@ const FlashCardsFunction: React.FC<CardsFunctionProps> = ({ lessonArray, lessonU
 
                     if (!res.completLessonsWords.includes(`lesson${lessonNum}`)) {
                         const lessonNumber = 'lesson' + lessonNum
-                        await fetch(`${process.env.REACT_APP_PUBLIC_API_URL}/user/data/updatewords`, {
+                        await fetch(`/user/data/updatewords`, {
                             method: 'POST',
                             headers: {
                                 'Authorization': `Bearer ${token}`,
@@ -128,7 +128,7 @@ const FlashCardsFunction: React.FC<CardsFunctionProps> = ({ lessonArray, lessonU
 
                     if (!res.completLessonsKanji.includes(`lesson${lessonNum}`)) {
                         const lessonNumber = 'lesson' + lessonNum
-                        await fetch(`${process.env.REACT_APP_PUBLIC_API_URL}/user/data/updatekanji`, {
+                        await fetch(`/user/data/updatekanji`, {
                             method: 'POST',
                             headers: {
                                 'Authorization': `Bearer ${token}`,
