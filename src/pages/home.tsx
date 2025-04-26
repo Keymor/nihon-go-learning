@@ -87,15 +87,15 @@ export default function Home() {
                     </div>
                     {logInFun()}
                     <div style={{ display: loginCheck ? '' : 'none' }} className="w-full flex flex-col sm:flex-row mx-auto gap-3 sm:gap-30">
-                        <div style={{ display: animation.second ? '' : 'none' }} className="relative animate-[homeCards_0.5s_forwards] bg-[url('/homeButton1.jpg')] bg-cover bg-no-repeat h-55 w-2/5 mx-auto lg:w-80 lg:h-115 rounded-4xl shadow-xl flex flex-col">
+                        <div style={{ display: animation.second ? '' : 'none' }} className="relative animate-[homeCards_0.5s_forwards] bg-[url('/homeMobile3.jpg')] sm:bg-[url('/homeButton1.jpg')] bg-cover bg-no-repeat h-55 w-2/5 mx-auto lg:w-80 lg:h-115 rounded-4xl shadow-xl flex flex-col">
                             <p className="m-auto font-bold text-4xl sm:text-6xl text-gray-700">{userScore.lessons}/10</p>
                             <p className="absolute bottom-10 left-1/2 -translate-x-1/2 text-md sm:text-2xl text-gray-700 whitespace-nowrap">Lessons complite</p>
                         </div>
-                        <div style={{ display: animation.second ? '' : 'none' }} className="relative animate-[homeCards_1s_forwards] bg-[url('/homeButton2.jpg')] bg-cover bg-no-repeat h-55 w-2/5 mx-auto lg:w-80 lg:h-115 rounded-4xl flex flex-col shadow-xl">
+                        <div style={{ display: animation.second ? '' : 'none' }} className="relative animate-[homeCards_1s_forwards] bg-[url('/homeMobile1.jpg')] sm:bg-[url('/homeButton2.jpg')] bg-cover bg-no-repeat h-55 w-2/5 mx-auto lg:w-80 lg:h-115 rounded-4xl flex flex-col shadow-xl">
                             <p className="m-auto font-bold text-4xl sm:text-6xl text-gray-700">{userScore.words}/100</p>
                             <p className="absolute bottom-10 left-1/2 -translate-x-1/2 text-md sm:text-2xl text-gray-700 whitespace-nowrap">Mastered words</p>
                         </div>
-                        <div style={{ display: animation.second ? '' : 'none' }} className="relative animate-[homeCards_1.5s_forwards] bg-[url('/homeButton3.jpg')] bg-cover bg-no-repeat h-55 w-2/5 mx-auto lg:w-80 lg:h-115 rounded-4xl flex flex-col shadow-xl">
+                        <div style={{ display: animation.second ? '' : 'none' }} className="relative animate-[homeCards_1.5s_forwards] bg-[url('/homeMobile2.jpg')] sm:bg-[url('/homeButton3.jpg')] bg-cover bg-no-repeat h-55 w-2/5 mx-auto lg:w-80 lg:h-115 rounded-4xl flex flex-col shadow-xl">
                             <p className="m-auto font-bold text-4xl sm:text-6xl text-gray-700">{userScore.kanji}/100</p>
                             <p className="absolute bottom-10 left-1/2 -translate-x-1/2 text-md sm:text-2xl text-gray-700">Kanji</p>
                         </div>
