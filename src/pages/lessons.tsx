@@ -156,10 +156,10 @@ export default function Lessons() {
                     )
                 })}
             </div>
-            <div style={{ display: startLesson ? '' : 'none' }} className="flex flex-col sm:max-w-320 justify-center gap-8 mx-auto my-20 p-10 w-full shadow-[5px_5px_8px_rgb(0,0,0,0.15)] rounded-2xl relative animate-[homeCards_1s_forwards]">
+            <div style={{ display: startLesson ? '' : 'none' }} className="flex flex-col max-w-9/10 lg:max-w-320 justify-center gap-8 mx-auto my-20 p-4 sm:p-10 w-full shadow-[5px_5px_8px_rgb(0,0,0,0.15)] rounded-2xl relative animate-[homeCards_1s_forwards]">
                 <div className=" inset-0 absolute size-full rounded-4xl shadow-[-8px_-8px_8px_rgba(255,255,255,1)]" />
                 {currentLesson}
-                <div className="flex flex-row">
+                <div className="flex flex-row mx-auto w-full">
                     <button onClick={() => toggleLesson(0)} className="hover:bg-[rgb(231,92,92,1)] hover:text-gray-700 cursor-pointer w-80 mt-auto mx-auto shadow-md p-5 rounded-4xl font-extrabold text-gray-400 text-xl relative z-2">
                         <div className="absolute size-full inset-0 rounded-4xl shadow-[-8px_-8px_8px_rgba(255,255,255,1)]" />
                         BACK

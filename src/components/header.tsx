@@ -4,9 +4,10 @@ import PlayButton from "./playButton"
 
 export default function Header() {
     const [clicked, setClicked] = useState(false)
+
     return (
-        <div className='w-full mx-auto h-20 sm:min-h-28 flex flex-row'>
-            <div popover="" id="menu" className="h-full w-[110%] rounded-4xl bg-white animate-[slide_0.8s_forwards] shadow-2xl">
+        <div className='w-full mx-auto h-20 sm:min-h-28 flex flex-row relative'>
+            <div style={{ transform: clicked ? 'translateX(0%)' : 'translateX(-110%)' }} className="z-32 absolute duration-800 h-screen w-[100%] rounded-4xl shadow-2xl">
                 <div id="menu-container" className="size-full flex flex-col">
                     <Logo />
                     <div className="w-50 h-80 m-auto flex-col flex gap-2 z-1">
@@ -19,11 +20,11 @@ export default function Header() {
                             <PlayButton link='/logout' text='Log out' />
                         </div>
                     </div>
-                    <button popoverTargetAction="hide" popoverTarget="menu" className="size-full absolute inset-0 z-0" onClick={() => console.log('clicked')} />
+                    <button className="size-full absolute inset-0 z-0" onClick={() => setClicked(!clicked)} />
                 </div>
             </div>
-            <div className='p-4 m-10 my-auto flex sm:hidden'>
-                <button popoverTargetAction="show" popoverTarget="menu" className='border-1 border-black rounded-3xl p-3'>Side</button>
+            <div className=' p-5 w-full flex sm:hidden mt-5'>
+                <button onClick={() => setClicked(!clicked)} className=' h-6 w-10 bg-cover border-black bg-[url("/menu.png")] animate-[homeCards_1s_forwards]'></button>
             </div>
             <div className='my-auto sm:ml-20 gap-5 hidden sm:flex'>
                 <PlayButton link='/home' text='Home' />

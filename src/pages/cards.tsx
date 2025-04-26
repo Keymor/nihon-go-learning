@@ -92,7 +92,7 @@ export default function Cards() {
             </div>
             <Header />
             <div className="flex flex-col mt-15 mx-auto animate-[homeCards_1s_forwards]">
-                <h1 className="flex m-auto font-bold text-4xl text-gray-700">Welcome</h1>
+                <h1 className="flex m-auto font-bold text-4xl text-gray-700">Vocabulary practice</h1>
                 <p className="flex m-auto text-xl text-gray-500">Flesh cards</p>
             </div>
             <div style={{ display: startLesson ? 'none' : 'flex' }} className="flex-col animate-[homeCards_1s_forwards]">
@@ -115,7 +115,7 @@ export default function Cards() {
                     START
                 </button>
             </div>
-            <div style={{ display: startLesson ? 'flex' : 'none' }} className="flex mx-auto mt-15 animate-[homeCards_1s_forwards]">
+            <div style={{ display: startLesson ? 'flex' : 'none' }} className="flex w-full mx-auto mt-15 animate-[homeCards_1s_forwards]">
                 <FlashCardsFunction lessonArray={lessonWordsArray} lessonUpdate={finishLessonFun} />
             </div>
             <Footer />

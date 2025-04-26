@@ -74,8 +74,8 @@ export default function Kanji() {
             </div>
             <Header />
             <div className="flex flex-col mt-15 mx-auto animate-[homeCards_1s_forwards]">
-                <h1 className="flex m-auto font-bold text-4xl text-gray-700">Welcome</h1>
-                <p className="flex m-auto text-xl text-gray-500">Continue your journey to mastering Japanese</p>
+                <h1 className="flex m-auto font-bold text-4xl text-gray-700">Kanji practice</h1>
+                <p className="flex m-auto text-xl text-gray-500">Flesh cards</p>
             </div>
             <div style={{ display: startLesson ? 'none' : 'flex' }} className="flex-col animate-[homeCards_1s_forwards]">
                 <div className="bg-gray-100 mx-auto mt-15 w-80 py-5 h-fit rounded-3xl flex flex-col justify-between relative inset-shadow-[2px_2px_15px_rgb(0,0,0,0.2)]">
@@ -97,7 +97,7 @@ export default function Kanji() {
                     START
                 </button>
             </div>
-            <div style={{ display: startLesson ? '' : 'none' }} className="flex mx-auto mt-15 animate-[homeCards_1s_forwards]">
+            <div style={{ display: startLesson ? '' : 'none' }} className="flex w-full mt-15 animate-[homeCards_1s_forwards]">
                 <FlashCardsFunction lessonArray={kanjiListArray[choosed]?.kanjis} lessonUpdate={startLessonFun} />
             </div>
             <Footer />

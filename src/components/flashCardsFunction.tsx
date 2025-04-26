@@ -180,7 +180,7 @@ const FlashCardsFunction: React.FC<CardsFunctionProps> = ({ lessonArray, lessonU
     }, [workArray, repeatArray])
 
     return (
-        <div className="w-150 h-100 shadow-lg rounded-4xl gap-5 flex flex-col justify-between px-10 py-15 relative">
+        <div className="w-9/10 mx-auto lg:w-150 h-100 shadow-lg rounded-4xl gap-5 flex flex-col justify-between px-10 py-15 relative">
             <div className=" absolute size-full -translate-x-10 -translate-y-15 rounded-4xl shadow-[-8px_-8px_8px_rgba(255,255,255,1)]"></div>
             <div style={{ display: finish ? 'none' : '' }}>
                 <div className="flex w-full">
@@ -198,11 +198,11 @@ const FlashCardsFunction: React.FC<CardsFunctionProps> = ({ lessonArray, lessonU
                 {displayWords()}
             </div>
             <div style={{ display: finish ? 'none' : '' }} className="flex flex-row">
-                <button className="hover:bg-gray-700 hover:text-[rgb(231,92,92,1)] cursor-pointer w-50 shadow-md p-4 rounded-4xl font-bold text-gray-700 relative"
+                <button className="hover:bg-gray-700 hover:text-[rgb(231,92,92,1)] cursor-pointer w-30 lg:w-50 shadow-md p-4 rounded-4xl font-bold text-gray-700 relative"
                     disabled={repeatArray.length === 0 && workArray.length === 0 ? true : false}>
                     <div onClick={repeatWords} className="absolute size-full -translate-x-4 -translate-y-4 rounded-4xl shadow-[-8px_-8px_8px_rgba(255,255,255,1)]"></div>
                     REPEAT</button>
-                <button onClick={cardsNext} className="hover:bg-[rgb(231,92,92,1)] cursor-pointer w-50 ml-auto shadow-md p-4 rounded-4xl font-bold text-gray-700 relative">
+                <button onClick={cardsNext} className="hover:bg-[rgb(231,92,92,1)] cursor-pointer w-30 lg:w-50 ml-auto shadow-md p-4 rounded-4xl font-bold text-gray-700 relative">
                     <div className=" absolute size-full -translate-x-4 -translate-y-4 rounded-4xl shadow-[-8px_-8px_8px_rgba(255,255,255,1)]"></div>
                     {clickButton ? 'NEXT' : 'CHECK'}
                 </button>

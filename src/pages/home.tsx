@@ -11,7 +11,7 @@ import { useEffect, useState } from "react"
 //clean code
 
 //loadin regitration
-//lessons
+//lessons order
 
 interface UserParam {
     lessons: number,
@@ -73,7 +73,7 @@ export default function Home() {
             <div style={{ display: animation.second ? '' : 'none' }} className="animate-[homeCards_1s_forwards] hidden sm:block">
                 <Logo />
             </div>
-            <div style={{ display: loginCheck && animation.second ? '' : 'none' }} className="animate-[logoUp_1s_forwards]">
+            <div style={{ display: loginCheck && animation.second ? '' : 'none' }} className="animate-[logoUp_1s_forwards] z-50 sm:z-0">
                 <Header />
             </div>
             <div className="h-full flex flex-col gap-10 sm:gap-20 sm:m-auto">
