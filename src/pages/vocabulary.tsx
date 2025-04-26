@@ -61,6 +61,7 @@ export default function Vocabulary() {
                 {vocab?.map((item, index) => {
                     return (
                         <div
+                            key={index}
                             style={{
                                 animation: `homeCards ${0.1 + (index / 10)}s forwards`,
                                 display: item.englishMeaning.includes(search) || item.japaneseWord.includes(search) ? '' : 'none'

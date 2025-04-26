@@ -6,7 +6,6 @@ import { useEffect, useState } from "react"
 
 //end of cards logo
 //logo shift
-//mobile UI
 //red cercle dissapear to quikly
 //clean code
 
