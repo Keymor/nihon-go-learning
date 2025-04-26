@@ -46,10 +46,16 @@ export default function Lessons() {
             newArray = [...newArray, item]
         })
         setLoading(false)
+        newArray.sort((a: Lessons, b: Lessons) => {
+            const aNum = parseInt(a.lesson.substring(1))
+            const bNum = parseInt(b.lesson.substring(1))
+            return aNum - bNum
+        })
         setLessons(newArray)
     }
 
     const toggleLesson = (num: number) => {
+        window.scrollTo(0, 0)
         setStartLesson(!startLesson)
         setLesNum(num)
         switch (num) {
@@ -124,8 +130,8 @@ export default function Lessons() {
             <Logo />
             <Header />
             <div style={{ display: startLesson ? 'none' : '' }} className="flex flex-col animate-[homeCards_1s_forwards]">
-                <h1 className="flex m-auto text-4xl text-center font-bold mt-15 text-gray-700">Lessons</h1>
-                <p className="flex m-auto text-xl text-gray-500">Basic level</p>
+                <h1 className="flex m-auto text-2xl sm:text-4xl text-center font-bold mt-15 text-gray-700">Lessons</h1>
+                <p className="flex m-auto text-lg sm:text-xl text-gray-500">Basic level</p>
             </div>
             <div style={{ display: startLesson ? 'none' : '' }} className="flex flex-wrap sm:max-w-320 justify-center gap-8 mx-auto py-20 w-full">
                 {lessons?.map((item, index) => {
@@ -159,16 +165,16 @@ export default function Lessons() {
             <div style={{ display: startLesson ? '' : 'none' }} className="flex flex-col max-w-9/10 lg:max-w-320 justify-center gap-8 mx-auto my-20 p-4 sm:p-10 w-full shadow-[5px_5px_8px_rgb(0,0,0,0.15)] rounded-2xl relative animate-[homeCards_1s_forwards]">
                 <div className=" inset-0 absolute size-full rounded-4xl shadow-[-8px_-8px_8px_rgba(255,255,255,1)]" />
                 {currentLesson}
-                <div className="flex flex-row mx-auto w-full">
-                    <button onClick={() => toggleLesson(0)} className="hover:bg-[rgb(231,92,92,1)] hover:text-gray-700 cursor-pointer w-80 mt-auto mx-auto shadow-md p-5 rounded-4xl font-extrabold text-gray-400 text-xl relative z-2">
+                <div className="flex flex-col sm:flex-row mx-auto w-2/3 sm:w-full gap-4">
+                    <button onClick={() => toggleLesson(0)} className="hover:bg-[rgb(231,92,92,1)] hover:text-gray-700 cursor-pointer w-full sm:w-80 mt-auto mx-auto shadow-md p-5 rounded-4xl font-extrabold text-gray-400 text-xl relative z-2">
                         <div className="absolute size-full inset-0 rounded-4xl shadow-[-8px_-8px_8px_rgba(255,255,255,1)]" />
                         BACK
                     </button>
-                    <button onClick={() => compliteLesson(lesNum)} className="hover:bg-[rgb(231,92,92,1)] hover:text-gray-700 cursor-pointer w-80 mt-auto mx-auto shadow-md p-5 rounded-4xl font-extrabold text-gray-400 text-xl relative z-2">
+                    <button onClick={() => compliteLesson(lesNum)} className="hover:bg-[rgb(231,92,92,1)] hover:text-gray-700 cursor-pointer w-full sm:w-80 mt-auto mx-auto shadow-md p-5 rounded-4xl font-extrabold text-gray-400 text-xl relative z-2">
                         <div className="absolute size-full inset-0 rounded-4xl shadow-[-8px_-8px_8px_rgba(255,255,255,1)]" />
                         COMPLETE
                     </button>
-                    <a href="/cards" className="hover:bg-[rgb(231,92,92,1)] text-center hover:text-gray-700 cursor-pointer w-80 mt-auto mx-auto shadow-md p-5 rounded-4xl font-extrabold text-gray-400 text-xl relative z-2">
+                    <a href="/cards" className="hover:bg-[rgb(231,92,92,1)] text-center hover:text-gray-700 cursor-pointer w-full sm:w-80 mt-auto mx-auto shadow-md p-5 rounded-4xl font-extrabold text-gray-400 text-xl relative z-2">
                         <div className="absolute size-full inset-0 rounded-4xl shadow-[-8px_-8px_8px_rgba(255,255,255,1)]" />
                         CARDS
                     </a>

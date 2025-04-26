@@ -1,7 +1,7 @@
 export default function Lesson2() {
     return (
         <div className="text-gray-700">
-            <div className="flex justify-between font-bold text-3xl">
+            <div className="flex flex-col gap-5 sm:flex-row justify-between font-bold text-xl sm:text-3xl">
                 <h1 className="">これ・それ・あれ (This, That, That over there)</h1>
                 <h1 className="text-[rgb(231,92,92,1)]">だい2か (Lesson 2)</h1>
             </div>

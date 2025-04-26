@@ -1,9 +1,9 @@
 export default function Lesson1() {
     return (
         <div className="text-gray-700">
-            <div className="flex flex-col gap-5 sm:flex-row justify-between font-bold text-3xl">
-                <h1 className="">はじめまして (Nice to meet you) </h1>
-                <h1 className="text-[rgb(231,92,92,1)]">だい1か (Lesson 1)</h1>
+            <div className="flex flex-col gap-5 sm:flex-row justify-between font-bold text-xl sm:text-3xl">
+                <h1 className="">はじめまして <b>(Nice to meet you)</b> </h1>
+                <h1 className="text-[rgb(231,92,92,1)]">だい1か <b>(Lesson 1)</b></h1>
             </div>
             <h2 className="mt-5 font-bold text-[rgb(231,92,92,1)]">1. かいわ (Conversation)</h2>
             <h3 className="mt-1 font-medium text-gray-700">👥 A & B introduce themselves</h3>

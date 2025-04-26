@@ -11,7 +11,7 @@ import { useEffect, useState } from "react"
 //clean code
 
 //loadin regitration
-//lessons order
+
 
 interface UserParam {
     lessons: number,
@@ -77,9 +77,9 @@ export default function Home() {
                 <Header />
             </div>
             <div className="h-full flex flex-col gap-10 sm:gap-20 sm:m-auto">
-                <div style={{ display: animation.second && loginCheck ? '' : 'none' }} className="flex flex-col mx-auto animate-[homeCards_2s_forwards]">
-                    <h1 className="flex mx-auto font-bold text-3xl sm:text-4xl text-gray-700">Welcome, {userScore.username}</h1>
-                    <p className="flex mx-auto text-md sm:text-xl text-gray-500">Continue your journey to mastering Japanese</p>
+                <div style={{ display: animation.second && loginCheck ? '' : 'none' }} className="flex flex-col mt-15 mx-auto animate-[homeCards_2s_forwards]">
+                    <h1 className="flex mx-auto font-bold text-2xl sm:text-4xl text-gray-700">Welcome, {userScore.username}</h1>
+                    <p className="flex mx-auto text-lg sm:text-xl text-gray-500">Continue your journey to mastering Japanese</p>
                 </div>
                 <div className=" min-h-full min-w-full mx-auto flex flex-col">
                     <div style={{ display: animation.first ? '' : 'none' }} className=" animate-[logo_1s_ease-in_forwards] m-auto translate-y-10 flex bg-[url('/circle.png')] lg:w-[624px] lg:h-[660px] w-[250px] h-[310px] bg-cover bg-center">

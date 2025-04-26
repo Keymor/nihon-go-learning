@@ -33,7 +33,7 @@ export default function Header() {
                 <PlayButton link='/kanji' text='Kanji' />
                 <PlayButton link='/vocabulary' text='Vocabulary' />
             </div>
-            <div className='ml-auto my-auto mr-10 hidden sm:mr-20'>
+            <div className='ml-auto my-auto mr-10 hidden sm:block sm:mr-20'>
                 <PlayButton link='/logout' text='Log out' />
             </div>
         </div>
