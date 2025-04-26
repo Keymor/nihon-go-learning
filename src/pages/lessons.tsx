@@ -1,6 +1,7 @@
 import Header from "../components/header"
 import Logo from "../components/logo"
 import Footer from "../components/footer"
+import Loading from "../components/loading"
 import Lesson1 from "../lessons/lesson1"
 import Lesson2 from "../lessons/Lesson2"
 import Lesson3 from "../lessons/Lesson3"
@@ -24,15 +25,15 @@ interface Lessons {
 }
 
 export default function Lessons() {
+    const [loading, setLoading] = useState(false)
     const [lessons, setLessons] = useState<Lessons[]>()
     const [startLesson, setStartLesson] = useState(false)
-    // const [animation, setAnimation] = useState(false)
     const [lesNum, setLesNum] = useState(0)
     const [currentLesson, setCurrentLesson] = useState<React.ReactNode | null>()
 
     const addVocab = async () => {
         const token = localStorage.getItem('token')
-        const req = await fetch(`${import.meta.env.VITE_API_URL}/userdata/lessons`, {
+        const req = await fetch(`${import.meta.env.VITE_API_URL}/lessons`, {
             method: 'GET',
             headers: {
                 'Authorization': `Bearer ${token}`,
@@ -44,6 +45,7 @@ export default function Lessons() {
         res.forEach((item: Lessons) => {
             newArray = [...newArray, item]
         })
+        setLoading(false)
         setLessons(newArray)
     }
 
@@ -99,24 +101,26 @@ export default function Lessons() {
 
     const compliteLesson = async (lessonNum: number) => {
         toggleLesson(0)
-        
+
         const token = localStorage.getItem('token')
-        fetch (`${import.meta.env.VITE_API_URL}/userdata/lessons`, {
+        fetch(`${import.meta.env.VITE_API_URL}/userdata/lessons`, {
             method: 'POST',
             headers: {
                 'Authorization': `Bearer ${token}`,
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({lessons: `Lesson ${lessonNum}`})
+            body: JSON.stringify({ lessons: `Lesson ${lessonNum}` })
         })
     }
 
     useEffect(() => {
+        setLoading(true)
         addVocab()
     }, [])
 
     return (
         <div className="w-screen h-screen flex flex-col">
+            {loading ? <Loading /> : null}
             <Logo />
             <Header />
             <div style={{ display: startLesson ? 'none' : '' }} className="flex flex-col animate-[homeCards_1s_forwards]">
@@ -170,7 +174,7 @@ export default function Lessons() {
                     </a>
                 </div>
             </div>
-            <Footer /> 
+            <Footer />
         </div>
     )
 }

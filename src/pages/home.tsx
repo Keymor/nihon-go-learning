@@ -10,6 +10,9 @@ import { useEffect, useState } from "react"
 //red cercle dissapear to quikly
 //clean code
 
+//loadin regitration
+//lessons
+
 interface UserParam {
     lessons: number,
     words: number,
