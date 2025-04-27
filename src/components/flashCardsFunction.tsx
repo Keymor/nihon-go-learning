@@ -23,6 +23,8 @@ interface Kanji {
     lesson: number
 }
 
+// Can hendle different inputs. It this moumeny it can take words or kanji for flesh cards. All types are above.
+
 const FlashCardsFunction: React.FC<CardsFunctionProps> = ({ lessonArray, lessonUpdate }) => {
     const [lessonType, setLessonType] = useState('')
     const [clickButton, setClickButton] = useState(false)
@@ -40,6 +42,7 @@ const FlashCardsFunction: React.FC<CardsFunctionProps> = ({ lessonArray, lessonU
     const [repeatArray, setRepeateArray] = useState<Word[]>([])
     const [finish, setFinish] = useState(false)
 
+    // Fun for changing new and repited words. 
     const cardsNext = () => {
         if (workArray.length === 0 && repeatArray.length > 0 && clickButton) {
             let newArray = repeatArray.slice(1)
@@ -54,7 +57,8 @@ const FlashCardsFunction: React.FC<CardsFunctionProps> = ({ lessonArray, lessonU
             setClickButton(!clickButton)
         }
     }
-
+    
+    // Push displaed word to the end of array. Remove first element in array. 
     const repeatWords = () => {
         if (workArray.length === 0) {
             let newArray = repeatArray
@@ -74,6 +78,7 @@ const FlashCardsFunction: React.FC<CardsFunctionProps> = ({ lessonArray, lessonU
         }
     }
 
+    // Display word, translation and congrats after finish.
     const displayWords = () => {
         return (
             <div className="m-auto flex flex-col">
@@ -93,6 +98,7 @@ const FlashCardsFunction: React.FC<CardsFunctionProps> = ({ lessonArray, lessonU
         )
     }
 
+    // Finish the lesson. Push done lesson to the server depending on type of the lesson. Run fun for closing box.
     const reloadFun = () => {
 
         const userUpdate = async (lessonNum: number) => {
@@ -100,8 +106,7 @@ const FlashCardsFunction: React.FC<CardsFunctionProps> = ({ lessonArray, lessonU
             const req = await fetch(`${import.meta.env.VITE_API_URL}/userdata`, {
                 method: 'GET',
                 headers: {
-                    'Authorization': `Bearer ${token}`,
-                    'Content-Type': 'application/json'
+                    'Authorization': `Bearer ${token}`
                 }
             })
 
@@ -160,6 +165,7 @@ const FlashCardsFunction: React.FC<CardsFunctionProps> = ({ lessonArray, lessonU
         setFinish(false)
     }
 
+    // Check the type of lesson and set the state.
     useEffect(() => {
         if (!lessonArray) {
             console.log(undefined)
@@ -173,6 +179,7 @@ const FlashCardsFunction: React.FC<CardsFunctionProps> = ({ lessonArray, lessonU
         setWorkArray(lessonArray)
     }, [lessonArray])
 
+    // Check if the lesson is done. If so, end and set all back. 
     useEffect(() => {
         if (repeatArray.length === 0 && workArray.length === 0) {
             setFinish(true)

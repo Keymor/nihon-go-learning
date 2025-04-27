@@ -31,13 +31,13 @@ export default function Lessons() {
     const [lesNum, setLesNum] = useState(0)
     const [currentLesson, setCurrentLesson] = useState<React.ReactNode | null>()
 
+    // Set array with all available lessons. Sort it.
     const addVocab = async () => {
         const token = localStorage.getItem('token')
         const req = await fetch(`${import.meta.env.VITE_API_URL}/lessons`, {
             method: 'GET',
             headers: {
-                'Authorization': `Bearer ${token}`,
-                'Content-Type': 'application/json'
+                'Authorization': `Bearer ${token}`
             }
         })
         const res = await req.json()
@@ -54,6 +54,7 @@ export default function Lessons() {
         setLessons(newArray)
     }
 
+    // Toggle choosen lesson.
     const toggleLesson = (num: number) => {
         window.scrollTo(0, 0)
         setStartLesson(!startLesson)
@@ -105,11 +106,12 @@ export default function Lessons() {
         }
     }
 
+    // Complite lesson to close it and push it to user score.
     const compliteLesson = async (lessonNum: number) => {
         toggleLesson(0)
 
         const token = localStorage.getItem('token')
-        fetch(`${import.meta.env.VITE_API_URL}/userdata/lessons`, {
+        fetch(`${import.meta.env.VITE_API_URL}/lessons`, {
             method: 'POST',
             headers: {
                 'Authorization': `Bearer ${token}`,
@@ -119,6 +121,7 @@ export default function Lessons() {
         })
     }
 
+    // Start getting lessons array.
     useEffect(() => {
         setLoading(true)
         addVocab()

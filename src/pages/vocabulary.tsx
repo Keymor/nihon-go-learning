@@ -1,6 +1,7 @@
 import Logo from "../components/logo"
 import Header from "../components/header"
 import Footer from "../components/footer";
+import Loading from "../components/loading";
 import { useEffect, useState } from "react"
 
 interface wordsArray {
@@ -20,16 +21,17 @@ interface mainArray {
 
 export default function Vocabulary() {
 
+    const [loading, setLoading] = useState(false)
     const [search, setSearch] = useState('')
     const [vocab, setVocab] = useState<wordsArray[]>()
 
+    // Set array with words.
     const addVocab = async () => {
         const token = localStorage.getItem('token')
         const req = await fetch(`${import.meta.env.VITE_API_URL}/vocabulary`, {
             method: 'GET',
             headers: {
-                'Authorization': `Bearer ${token}`,
-                'Content-Type': 'application/json'
+                'Authorization': `Bearer ${token}`
             }
         })
         const res = await req.json()
@@ -37,15 +39,19 @@ export default function Vocabulary() {
         res.forEach((item: mainArray) => {
             newArray = [...newArray, ...item.words]
         })
+        setLoading(false)
         setVocab(newArray)
     }
 
+    // Start getting array. 
     useEffect(() => {
+        setLoading(true)
         addVocab()
     }, [])
 
     return (
         <div className="flex flex-col max-w-screen h-screen sm:min-h-screen relative">
+            {loading ? <Loading /> : null}
             <div >
                 <Logo />
             </div>

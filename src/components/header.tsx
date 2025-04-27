@@ -7,6 +7,7 @@ export default function Header() {
 
     return (
         <div className='w-full mx-auto h-20 sm:min-h-28 flex flex-row relative'>
+            {/* Mobile version on header. */}
             <div style={{ transform: clicked ? 'translateX(0%)' : 'translateX(-110%)' }} className="z-32 absolute duration-800 h-screen w-[100%] rounded-4xl shadow-2xl">
                 <div id="menu-container" className="size-full flex flex-col">
                     <Logo />
@@ -26,6 +27,7 @@ export default function Header() {
             <div className=' p-5 w-full flex sm:hidden mt-5'>
                 <button onClick={() => setClicked(!clicked)} className=' h-6 w-10 bg-cover border-black bg-[url("/menu.png")] animate-[homeCards_1s_forwards]'></button>
             </div>
+            {/* PC version of header. */}
             <div className='my-auto sm:ml-20 gap-5 hidden sm:flex'>
                 <PlayButton link='/home' text='Home' />
                 <PlayButton link='/lessons' text='Lessons' />

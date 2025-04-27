@@ -32,7 +32,8 @@ export default function Cards() {
         lesson: 0
     }])
 
-    const cardsStars = async (lessonNum: number) => {
+    // Loading chousen lesson and starting flash cards.
+    const cardsStarts = async (lessonNum: number) => {
         setLoading(true)
         try {
             const res = await fetch(`${import.meta.env.VITE_API_URL}/cards/lesson`, {
@@ -49,12 +50,14 @@ export default function Cards() {
         }
     }
 
+    // Hendle user choose and save only number of lesson.
     const hendleLessonNum = (lesson: string) => {
         const lastChar = lesson.split(' ')[1]
         const lessonNumber = parseInt(lastChar)
         setLessonNum(lessonNumber)
     }
 
+    // Finish fun. Set all important stats to default.
     const finishLessonFun = () => {
         setChoose(false)
         setStartLesson(false)
@@ -62,6 +65,7 @@ export default function Cards() {
         setLessonNum(0)
     }
 
+    // Get all available lessons and push it to state. 
     useEffect(() => {
         const updatelesNum = async () => {
             try {
@@ -100,6 +104,7 @@ export default function Cards() {
                 <div className="bg-gray-100 mx-auto mt-15 w-80 py-5 h-fit rounded-3xl flex flex-col justify-between relative inset-shadow-[2px_2px_15px_rgb(0,0,0,0.2)]">
                     <div className=" absolute w-80 h-full inset-0 rounded-3xl inset-shadow-[-6px_-6px_10px_rgb(255,255,255,1)] z-0"></div>
                     <p onClick={() => setChoose(!choose)} style={{ display: choose ? 'none' : 'flex' }} className="z-1 cursor-pointer flex mx-auto w-80 justify-center text-2xl font-medium text-gray-300">Choose lesson</p>
+                    {/* Array with available lessons. */}
                     {choose ?
                         lessonsArray.map((item, index) => {
                             return (
@@ -112,7 +117,7 @@ export default function Cards() {
                     }
                 </div>
                 <button style={{ backgroundColor: lessonNum > 0 ? '' : 'rgb(199, 199, 199)' }} disabled={lessonNum > 0 ? false : true} className="w-50 mt-10 bg-[rgb(231,92,92,1)] mx-auto shadow-md text-2xl p-4 rounded-4xl font-bold text-gray-700 relative">
-                    <div onClick={() => cardsStars(lessonNum)} className=" cursor-pointer absolute size-full -translate-x-4 -translate-y-4 rounded-4xl shadow-[-8px_-8px_8px_rgba(255,255,255,1)] "></div>
+                    <div onClick={() => cardsStarts(lessonNum)} className=" cursor-pointer absolute size-full -translate-x-4 -translate-y-4 rounded-4xl shadow-[-8px_-8px_8px_rgba(255,255,255,1)] "></div>
                     START
                 </button>
             </div>

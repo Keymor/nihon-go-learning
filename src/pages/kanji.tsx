@@ -41,6 +41,7 @@ export default function Kanji() {
         ]
     }])
 
+    // Check user token and set array with kanji lessons.
     useEffect(() => {
         setLoading(true)
         const token = localStorage.getItem('token')
@@ -57,11 +58,13 @@ export default function Kanji() {
         getLessons()
     }, [])
 
+    // Set choosen lesson to state.
     const hendleLessonNum = (num: number) => {
         setLessonNum(num)
         setChoosed(num)
     }
 
+    // Start lesson
     const startLessonFun = () => {
         setChoose(false)
         setStartLesson(!startLesson)

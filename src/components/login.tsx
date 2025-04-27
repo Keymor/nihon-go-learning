@@ -16,6 +16,7 @@ const Login: React.FC<componentFun> = ({ setLogin }) => {
     const [fade, setFade] = useState(false)
     const [incorrect, setInccorect] = useState(false)
 
+    // Registration new user with checking available name.
     const registerFun = async () => {
         try {
             setLoading(true)
@@ -38,6 +39,7 @@ const Login: React.FC<componentFun> = ({ setLogin }) => {
         }
     }
 
+    // LogIn with checkin if user is already exist. Save token from the server.
     const logInFun = async () => {
         try {
             setLoading(true)
@@ -61,6 +63,7 @@ const Login: React.FC<componentFun> = ({ setLogin }) => {
         }
     }
 
+    // Time out for propper animation play.
     useEffect(() => {
         if (fade) {
             setTimeout(() => {
@@ -70,6 +73,7 @@ const Login: React.FC<componentFun> = ({ setLogin }) => {
         }
     }, [fade])
 
+    // Checking condition of name and password field.
     useEffect(() => {
         if (password.length === 0 && secondPass.length === 0) {
             setCheckErr(true)
