@@ -1,9 +1,17 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import Logo from "./logo"
 import PlayButton from "./playButton"
 
 export default function Header() {
     const [clicked, setClicked] = useState(false)
+
+    useEffect(() => {
+        if (clicked) {
+            document.body.style.overflowY = 'hidden'
+        } else {
+            document.body.style.overflowY = 'auto'
+        }
+    }, [clicked])
 
     return (
         <div className='w-full mx-auto h-20 sm:min-h-28 flex flex-row relative'>
