@@ -4,6 +4,7 @@ Nihon-Go is a modern, full-stack Japanese learning web application where users c
 Built with a focus on beautiful design, secure authentication, and real-time user progress management.
 
 (Backend part: https://github.com/Keymor/nihon-go-learning-API)
+Site link: https://nihongo-learning.up.railway.app/
 
 ## Key Features
 
