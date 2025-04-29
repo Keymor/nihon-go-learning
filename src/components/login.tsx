@@ -16,14 +16,28 @@ const Login: React.FC<componentFun> = ({ setLogin }) => {
     const [fade, setFade] = useState(false)
     const [incorrect, setInccorect] = useState(false)
 
+    const guestUser = () => {
+        const nameChar = '0123456789';
+        const passwordsChar = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+-=';
+        let randomFeald = 'Guest';
+        let randomPasword = ''
+        for (let i = 0; i < 5; i++) {
+            randomFeald += nameChar.charAt(Math.floor(Math.random() * nameChar.length));
+            randomPasword += passwordsChar.charAt(Math.floor(Math.random() * passwordsChar.length))
+        }
+
+        const newUser = [randomFeald, randomPasword]
+        registerFun(newUser[0], newUser[1])
+    }
+
     // Registration new user with checking available name.
-    const registerFun = async () => {
+    const registerFun = async (nameUser: string, passwordUser: string) => {
         try {
             setLoading(true)
             const request = await fetch(`${import.meta.env.VITE_API_URL}/register`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ name: name, password: password })
+                body: JSON.stringify({ name: nameUser, password: passwordUser })
             })
             const respond = await request.json()
             if (respond.succes) {
@@ -89,7 +103,7 @@ const Login: React.FC<componentFun> = ({ setLogin }) => {
 
     return (
         <div>
-            <div style={{ transition: '0.3s', opacity: fade ? '0%' : '100%' }} className=" opacity-0 w-full min-h-fit h-100 shadow-[8px_8px_8px_rgba(0,0,0,0.2)] rounded-4xl flex flex-col justify-between px-10 py-8 relative">
+            <div style={{ transition: '0.3s', opacity: fade ? '0%' : '100%' }} className=" opacity-0 w-full min-h-fit h-120 shadow-[8px_8px_8px_rgba(0,0,0,0.2)] rounded-4xl flex flex-col justify-between px-10 py-8 relative">
                 <h1 className="font-bold mx-auto text-3xl text-gray-700">{registration ? 'Sign Up' : 'Log In'}</h1>
                 <div className="inset-0 absolute size-full rounded-4xl overflow-hidden">
                     {loading ? <Loading /> : null}
@@ -112,16 +126,21 @@ const Login: React.FC<componentFun> = ({ setLogin }) => {
                 <div className="flex flex-col">
                     {registration ?
                         <div className="flex flex-col">
-                            <button disabled={checkErr} onClick={registerFun} className=" disabled:bg-gray-400 w-50 bg-[rgb(231,92,92,1)] mt-5 mx-auto shadow-md text-2xl p-4 rounded-4xl font-bold text-gray-700 relative">
+                            <button disabled={checkErr} onClick={() => registerFun(name, password)} className=" disabled:bg-gray-400 w-50 bg-[rgb(231,92,92,1)] mt-5 mx-auto shadow-md text-2xl p-4 rounded-4xl font-bold text-gray-700 relative">
                                 <div className=" cursor-pointer absolute size-full -translate-x-4 -translate-y-4 rounded-4xl shadow-[-8px_-8px_8px_rgba(255,255,255,1)] "></div>
                                 Applay
                             </button>
                         </div>
                         :
-                        <button onClick={logInFun} className="w-50 bg-[rgb(231,92,92,1)] mt-5 mx-auto shadow-md text-2xl p-4 rounded-4xl font-bold text-gray-700 relative">
-                            <div className=" cursor-pointer absolute size-full -translate-x-4 -translate-y-4 rounded-4xl shadow-[-8px_-8px_8px_rgba(255,255,255,1)] "></div>
-                            logIn
-                        </button>
+                        <div className="flex flex-col">
+                            <button onClick={logInFun} className="w-50 bg-[rgb(231,92,92,1)] mt-5 mx-auto shadow-md text-2xl p-4 rounded-4xl font-bold text-gray-700 relative">
+                                <div className=" cursor-pointer absolute size-full -translate-x-4 -translate-y-4 rounded-4xl shadow-[-8px_-8px_8px_rgba(255,255,255,1)] "></div>
+                                logIn
+                            </button>
+                            <button onClick={guestUser} className="w-50 bg-[rgb(231,208,92)] mt-5 mx-auto shadow-md text-2xl p-4 rounded-4xl font-bold text-gray-700 relative">
+                                Go as Guest
+                            </button>
+                        </div>
                     }
                     <p style={{ display: registration ? 'none' : '' }} className="flex mt-5 m-auto z-1">Still don't have an accaunt? <a onClick={() => { setFade(true), setInccorect(false) }} className="z-1 underline cursor-pointer"> Register</a></p>
                     <p style={{ display: registration ? '' : 'none' }} className="flex mt-5 m-auto z-1">Already have an accaunt? <a onClick={() => setFade(true)} className="z-1 underline cursor-pointer"> logIn</a></p>
